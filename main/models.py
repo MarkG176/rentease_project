@@ -1,5 +1,10 @@
+from datetime import timedelta, date
+
 from django.db import models
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 class Tenants(models.Model):
     name = models.CharField(max_length=100)
@@ -42,3 +47,18 @@ class Payments(models.Model):
         return f"Payment for Lot {self.lot_no} - {self.tenant.name}"
 
 # Create your models here.
+# Signal to create/update payment when a lot is reassigned
+@receiver(post_save, sender=Properties)
+def create_or_update_payment(sender, instance, **kwargs):
+    if instance.tenant:  # Check if a tenant is assigned
+        expected_payment_date = date.today() + timedelta(days=30)  # Default expected payment is 30 days from today
+        payment, created = Payments.objects.get_or_create(
+            lot_no=instance,
+            tenant=instance.tenant,
+            defaults={'expected_date': expected_payment_date, 'status': 'pending'}
+        )
+        if not created:
+            # If payment exists, update expected date and status
+            payment.expected_date = expected_payment_date
+            payment.status = 'pending'
+            payment.save()

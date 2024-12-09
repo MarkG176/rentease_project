@@ -1,5 +1,6 @@
+from django.contrib.messages.context_processors import messages
 from django.shortcuts import render, get_object_or_404, redirect
-
+from datetime import timedelta, date
 # Create your views here.
 from django.shortcuts import render
 from .models import Tenants, Properties, Payments
@@ -26,9 +27,10 @@ def assign_lot(request, lot_no):
         tenant_id = request.POST.get('tenant_id')
         tenant = get_object_or_404(Tenants, id=tenant_id)
         property = get_object_or_404(Properties, lot_no=lot_no)
-        property.tenant = tenant  # Assuming Properties has a ForeignKey to Tenants
+        property.tenant = tenant
         property.save()
-        return redirect('success_page')  # Replace 'success_page' with your desired redirect
+        # messages.success(request, f'Lot {property.lot_no} was reassigned to {tenant.name}')
+        return redirect('properties')
     else:
         property = get_object_or_404(Properties, lot_no=lot_no)
         tenants = Tenants.objects.all()
