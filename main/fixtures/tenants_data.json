@@ -1,0 +1,252 @@
+[
+    {
+        "model": "main.tenants",
+        "pk": 1,
+        "fields": {
+            "name": "Matthew Kusaka",
+            "email": "mattk@gmail.com",
+            "phone": "0711223366",
+            "adm_no": "00001"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 2,
+        "fields": {
+            "name": "Maria Dlamini",
+            "email": "mariad@gmail.com",
+            "phone": "0722334455",
+            "adm_no": "00002"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 3,
+        "fields": {
+            "name": "Mark Njeru",
+            "email": "markn@gmail.com",
+            "phone": "0733445566",
+            "adm_no": "00003"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 4,
+        "fields": {
+            "name": "Zawadi Tumai",
+            "email": "zawat@gmail.com",
+            "phone": "0744556677",
+            "adm_no": "00004"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 5,
+        "fields": {
+            "name": "Kwame Osei",
+            "email": "kwameosei@gmail.com",
+            "phone": "0712233445",
+            "adm_no": "00005"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 6,
+        "fields": {
+            "name": "Amina Kazi",
+            "email": "aminakazi@gmail.com",
+            "phone": "0723345567",
+            "adm_no": "00006"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 7,
+        "fields": {
+            "name": "Thabo Nkosi",
+            "email": "thabonkosi@gmail.com",
+            "phone": "0734456678",
+            "adm_no": "00007"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 8,
+        "fields": {
+            "name": "Nia Chirwa",
+            "email": "niachirwa@gmail.com",
+            "phone": "0745567889",
+            "adm_no": "00008"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 9,
+        "fields": {
+            "name": "Buntu Moyo",
+            "email": "buntumoyo@gmail.com",
+            "phone": "0712334456",
+            "adm_no": "00009"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 10,
+        "fields": {
+            "name": "Chipo Mumba",
+            "email": "chipomumba@gmail.com",
+            "phone": "0723345678",
+            "adm_no": "00010"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 11,
+        "fields": {
+            "name": "Kofi Asante",
+            "email": "kofiasante@gmail.com",
+            "phone": "0734456677",
+            "adm_no": "00011"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 12,
+        "fields": {
+            "name": "Zanele Shumba",
+            "email": "zaneleshumba@gmail.com",
+            "phone": "0745567888",
+            "adm_no": "00012"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 13,
+        "fields": {
+            "name": "Oluwaseun Adebayo",
+            "email": "oluwaseunadebayo@gmail.com",
+            "phone": "0712233446",
+            "adm_no": "00013"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 14,
+        "fields": {
+            "name": "Koffi Ouattara",
+            "email": "koffiouattara@gmail.com",
+            "phone": "0723345568",
+            "adm_no": "00014"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 15,
+        "fields": {
+            "name": "Chike Okafor",
+            "email": "chikeokafor@gmail.com",
+            "phone": "0734456679",
+            "adm_no": "00015"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 16,
+        "fields": {
+            "name": "Mpho Mokoena",
+            "email": "mphomokoena@gmail.com",
+            "phone": "0745567887",
+            "adm_no": "00016"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 17,
+        "fields": {
+            "name": "Bongi Zulu",
+            "email": "bongizulu@gmail.com",
+            "phone": "0712334457",
+            "adm_no": "00017"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 18,
+        "fields": {
+            "name": "Adama Traore",
+            "email": "adamatraore@gmail.com",
+            "phone": "0723345569",
+            "adm_no": "00018"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 19,
+        "fields": {
+            "name": "Tinashe Nkomo",
+            "email": "tinasheknomo@gmail.com",
+            "phone": "0734456680",
+            "adm_no": "00019"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 20,
+        "fields": {
+            "name": "Aissatou Diallo",
+            "email": "aissadou@gmail.com",
+            "phone": "0745567886",
+            "adm_no": "00020"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 21,
+        "fields": {
+            "name": "Hassan Juma",
+            "email": "hassanjuma@gmail.com",
+            "phone": "0712233447",
+            "adm_no": "00021"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 22,
+        "fields": {
+            "name": "Mariam Ouattara",
+            "email": "mariamouattara@gmail.com",
+            "phone": "0723345570",
+            "adm_no": "00022"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 23,
+        "fields": {
+            "name": "James Mbatha",
+            "email": "jamesmbatha@gmail.com",
+            "phone": "0734456681",
+            "adm_no": "00023"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 24,
+        "fields": {
+            "name": "Dineo Tshabalala",
+            "email": "dineotshabalala@gmail.com",
+            "phone": "0745567885",
+            "adm_no": "00024"
+        }
+    },
+    {
+        "model": "main.tenants",
+        "pk": 25,
+        "fields": {
+            "name": "Adebola Alabi",
+            "email": "adebolalabi@gmail.com",
+            "phone": "0712334458",
+            "adm_no": "00025"
+        }
+    }
+]

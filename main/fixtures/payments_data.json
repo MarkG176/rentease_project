@@ -1,0 +1,133 @@
+[
+    {
+        "model": "app_name.payments",
+        "pk": 1,
+        "fields": {
+            "lot_no": 1,
+            "tenant": 1,
+            "status": "successful",
+            "expected_date": "2024-01-01",
+            "payment_date": "2024-01-02",
+            "created_at": "2024-01-01T12:00:00Z",
+            "updated_at": "2024-01-02T12:00:00Z"
+        }
+    },
+    {
+        "model": "app_name.payments",
+        "pk": 2,
+        "fields": {
+            "lot_no": 2,
+            "tenant": 2,
+            "status": "late",
+            "expected_date": "2024-01-15",
+            "payment_date": "2024-01-20",
+            "created_at": "2024-01-15T12:00:00Z",
+            "updated_at": "2024-01-20T12:00:00Z"
+        }
+    },
+    {
+        "model": "app_name.payments",
+        "pk": 3,
+        "fields": {
+            "lot_no": 3,
+            "tenant": 3,
+            "status": "failed",
+            "expected_date": "2024-02-01",
+            "payment_date": null,
+            "created_at": "2024-02-01T12:00:00Z",
+            "updated_at": "2024-02-01T12:00:00Z"
+        }
+    },
+    {
+        "model": "app_name.payments",
+        "pk": 4,
+        "fields": {
+            "lot_no": 4,
+            "tenant": 4,
+            "status": "successful",
+            "expected_date": "2024-03-01",
+            "payment_date": "2024-03-02",
+            "created_at": "2024-03-01T12:00:00Z",
+            "updated_at": "2024-03-02T12:00:00Z"
+        }
+    },
+    {
+        "model": "app_name.payments",
+        "pk": 5,
+        "fields": {
+            "lot_no": 5,
+            "tenant": 5,
+            "status": "successful",
+            "expected_date": "2024-04-01",
+            "payment_date": "2024-04-01",
+            "created_at": "2024-04-01T12:00:00Z",
+            "updated_at": "2024-04-01T12:00:00Z"
+        }
+    },
+    {
+        "model": "app_name.payments",
+        "pk": 6,
+        "fields": {
+            "lot_no": 6,
+            "tenant": 6,
+            "status": "late",
+            "expected_date": "2024-05-01",
+            "payment_date": "2024-05-05",
+            "created_at": "2024-05-01T12:00:00Z",
+            "updated_at": "2024-05-05T12:00:00Z"
+        }
+    },
+    {
+        "model": "app_name.payments",
+        "pk": 7,
+        "fields": {
+            "lot_no": 7,
+            "tenant": 7,
+            "status": "successful",
+            "expected_date": "2024-06-01",
+            "payment_date": "2024-06-01",
+            "created_at": "2024-06-01T12:00:00Z",
+            "updated_at": "2024-06-01T12:00:00Z"
+        }
+    },
+    {
+        "model": "app_name.payments",
+        "pk": 8,
+        "fields": {
+            "lot_no": 8,
+            "tenant": 8,
+            "status": "failed",
+            "expected_date": "2024-07-01",
+            "payment_date": null,
+            "created_at": "2024-07-01T12:00:00Z",
+            "updated_at": "2024-07-01T12:00:00Z"
+        }
+    },
+    {
+        "model": "app_name.payments",
+        "pk": 9,
+        "fields": {
+            "lot_no": 9,
+            "tenant": 9,
+            "status": "successful",
+            "expected_date": "2024-08-01",
+            "payment_date": "2024-08-02",
+            "created_at": "2024-08-01T12:00:00Z",
+            "updated_at": "2024-08-02T12:00:00Z"
+        }
+    },
+    {
+        "model": "app_name.payments",
+        "pk": 10,
+        "fields": {
+            "lot_no": 10,
+            "tenant": 10,
+            "status": "late",
+            "expected_date": "2024-09-01",
+            "payment_date": "2024-09-05",
+            "created_at": "2024-09-01T12:00:00Z",
+            "updated_at": "2024-09-05T12:00:00Z"
+        }
+    },
+    ...
+]

@@ -1,0 +1,24 @@
+{% extends 'master.html' %}
+{% block content %}
+<h1>Tenants</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Admin No</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tenant in tenants %}
+        <tr>
+            <td>{{ tenant.name }}</td>
+            <td>{{ tenant.email }}</td>
+            <td>{{ tenant.phone }}</td>
+            <td>{{ tenant.adm_no }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

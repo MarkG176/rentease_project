@@ -1,0 +1,36 @@
+{% extends 'master.html' %}
+{% block content %}
+
+{% block title %}
+    <title>Properties</title>
+{% endblock %}
+
+{#{% block extra_css %}#}
+{#    <!-- Custom styles for this template -->#}
+{#    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">#}
+{#{% endblock %}#}
+
+<h1>Properties</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Lot No</th>
+            <th>Tenant</th>
+            <th>Area</th>
+            <th>Price</th>
+            <th>Availability</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for property in properties %}
+        <tr>
+            <td>{{ property.lot_no }}</td>
+            <td>{{ property.tenant }}</td>
+            <td>{{ property.area }}</td>
+            <td>{{ property.price }}</td>
+            <td>{{ property.available }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
