@@ -1,36 +1,58 @@
 {% extends 'master.html' %}
-{% block content %}
+{% load static %}
+
 
 {% block title %}
     <title>Properties</title>
 {% endblock %}
 
-{#{% block extra_css %}#}
-{#    <!-- Custom styles for this template -->#}
-{#    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">#}
-{#{% endblock %}#}
+{% block extra_css %}
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+{% endblock %}
 
-<h1>Properties</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Lot No</th>
-            <th>Tenant</th>
-            <th>Area</th>
-            <th>Price</th>
-            <th>Availability</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for property in properties %}
-        <tr>
-            <td>{{ property.lot_no }}</td>
-            <td>{{ property.tenant }}</td>
-            <td>{{ property.area }}</td>
-            <td>{{ property.price }}</td>
-            <td>{{ property.available }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% block content %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Properties</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Lot No</th>
+                        <th>Tenant</th>
+                        <th>Area</th>
+                        <th>Price</th>
+                        <th>Availability</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for property in properties %}
+                        <tr>
+                            <td>{{ property.lot_no }}</td>
+                            <td>{{ property.tenant }}</td>
+                            <td>{{ property.area }}</td>
+                            <td>{{ property.price }}</td>
+                            <td>{{ property.available }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
+{% block extra_js %}
+
+    <!-- Page level plugins -->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+    <!-- Custom styles for this page -->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+    <!-- Page level custom scripts -->
+    <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
 {% endblock %}

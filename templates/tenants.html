@@ -1,24 +1,56 @@
 {% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Tenants</title>
+{% endblock %}
+
+{% block extra_css %}
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+
 {% block content %}
-<h1>Tenants</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Admin No</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for tenant in tenants %}
-        <tr>
-            <td>{{ tenant.name }}</td>
-            <td>{{ tenant.email }}</td>
-            <td>{{ tenant.phone }}</td>
-            <td>{{ tenant.adm_no }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tenants</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Admin No</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for tenant in tenants %}
+                        <tr>
+                            <td>{{ tenant.name }}</td>
+                            <td>{{ tenant.email }}</td>
+                            <td>{{ tenant.phone }}</td>
+                            <td>{{ tenant.adm_no }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
+{% block extra_js %}
+
+    <!-- Page level plugins -->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+    <!-- Custom styles for this page -->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+    <!-- Page level custom scripts -->
+    <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
 {% endblock %}
