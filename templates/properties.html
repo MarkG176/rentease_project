@@ -26,6 +26,7 @@
                         <th>Area</th>
                         <th>Price</th>
                         <th>Availability</th>
+                        <th>Assign Tenants</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,9 @@
                             <td>{{ property.area }}</td>
                             <td>{{ property.price }}</td>
                             <td>{{ property.available }}</td>
+                            <td>
+                                <a href="{% url 'assign_lot' property.lot_no %}" class="btn btn-outline-dark btn-sm">Reassign</a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

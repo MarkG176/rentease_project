@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
-    'django_daraja'
+    'django_daraja',
+    # 'crispy-bootstrap5',
+    # 'django-crispy-forms'
+
 
 ]
 
@@ -128,6 +131,9 @@ STATIC_ROOT = BASE_DIR  / 'assets'
 STATICFILES_DIRS = [BASE_DIR/'main/assets']
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

@@ -23,4 +23,5 @@ urlpatterns = [
     path('tenants/', views.tenants_view, name='tenants'),
     path('properties/', views.properties_view, name='properties'),
     path('payments/', views.payments_view, name='payments'),
+path('assign/<int:lot_no>', views.assign_lot, name='assign_lot'),
 ]

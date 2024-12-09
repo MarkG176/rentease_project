@@ -1,0 +1,30 @@
+{% extends 'master.html' %}
+{% block title %}
+    Assign Lot
+{% endblock %}
+
+{% block content %}
+
+<div class="col-sm-6">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Assign Lot {{ properties.lot_no }} to a Tenant</h6>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'assign_lot' properties.lot_no %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="tenantSelect" class="form-label">Select Tenant</label>
+                    <select id="tenantSelect" class="form-select" name="tenant_id" aria-label="Select Tenant">
+                        {% for tenant in tenants %}
+                            <option value="{{ tenant.id }}">{{ tenant.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
