@@ -1,0 +1,25 @@
+{% extends "master.html" %}
+
+{% block content %}
+  <div class="container">
+    <h2>Incident Detail</h2>
+
+    <div class="card">
+      <div class="card-header">
+        <h4>{{ incident.tenant_name }} - Incident #{{ incident.inc_no }}</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Lot No:</strong> {{ incident.lot_no }}</p>
+        <p><strong>Description:</strong> {{ incident.description }}</p>
+        <p><strong>Is Utility:</strong> {% if incident.is_utility %} Yes {% else %} No {% endif %}</p>
+        <p><strong>Is Social:</strong> {% if incident.is_social %} Yes {% else %} No {% endif %}</p>
+        <p><strong>Created At:</strong> {{ incident.created_at }}</p>
+      </div>
+      <div class="card-footer text-right">
+        <a href="{% url 'incident_edit' incident.id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'incident_delete' incident.id %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'incidents' %}" class="btn btn-secondary">Back to List</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

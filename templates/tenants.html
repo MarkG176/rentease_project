@@ -10,8 +10,43 @@
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
 {% endblock %}
 
-
 {% block content %}
+    <!-- Filter Section -->
+    <div class="card mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Search Tenants</h6>
+        </div>
+        <div class="card-body">
+            <form method="get" action="{% url 'tenants' %}">
+                <div class="form-row">
+                    <div class="col-md-3 mb-3">
+                        <label for="nameFilter">Name</label>
+                        <input type="text" class="form-control" id="nameFilter" name="name" 
+                               value="{{ request.GET.name }}" placeholder="Filter by name">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="emailFilter">Email</label>
+                        <input type="text" class="form-control" id="emailFilter" name="email" 
+                               value="{{ request.GET.email }}" placeholder="Filter by email">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="phoneFilter">Phone</label>
+                        <input type="text" class="form-control" id="phoneFilter" name="phone" 
+                               value="{{ request.GET.phone }}" placeholder="Filter by phone">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="admNoFilter">Admin No</label>
+                        <input type="text" class="form-control" id="admNoFilter" name="adm_no" 
+                               value="{{ request.GET.adm_no }}" placeholder="Filter by admin no">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Apply Filters</button>
+                <a href="{% url 'tenants' %}" class="btn btn-secondary">Clear Filters</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tenant Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Tenants</h6>
@@ -20,33 +55,36 @@
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Admin No</th>
-                    </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Admin No</th>
+                            <th>Actions</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {% for tenant in tenants %}
-                        <tr>
-                            <td>{{ tenant.name }}</td>
-                            <td>{{ tenant.email }}</td>
-                            <td>{{ tenant.phone }}</td>
-                            <td>{{ tenant.adm_no }}</td>
-                        
-                        </tr>
-                    {% endfor %}
+                        {% for tenant in tenants %}
+                            <tr>
+                                <td>{{ tenant.name }}</td>
+                                <td>{{ tenant.email }}</td>
+                                <td>{{ tenant.phone }}</td>
+                                <td>{{ tenant.adm_no }}</td>
+                                <td>
+                                    <a class="btn btn-danger btn-sm" href="{% url 'delete_tenant' tenant.adm_no %}">
+                                        Remove
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+{% endblock %}
 
-
-{% endblock content %}
 {% block extra_js %}
-
     <!-- Page level plugins -->
     <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>

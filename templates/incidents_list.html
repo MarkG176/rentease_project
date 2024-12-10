@@ -1,0 +1,86 @@
+{% extends 'master.html' %}
+
+{% block content %}
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Incidents</h1>
+
+    <!-- Sort Bar -->
+    <div class="sort-bar mb-4">
+        <div class="dropdown">
+            <select class="form-control" id="sortByDate">
+                <option value="">Sort by Date</option>
+                <option value="asc" {% if request.GET.date == 'asc' %}selected{% endif %}>Oldest First</option>
+                <option value="desc" {% if request.GET.date == 'desc' %}selected{% endif %}>Newest First</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" id="applySort">Apply Sort</button>
+    </div>
+
+    <!-- Incidents Table -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Incident List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="incidentsTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Incident ID</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Date Reported</th>
+                        <th>Lot No</th>
+                        <th>Tenant Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for incident in incidents %}
+                        <tr>
+                            <td>{{ incident.id }}</td>
+                            <td>{{ incident.description }}</td>
+                            <td>
+                                {% if incident.is_utility %}
+                                    Utility
+                                {% elif incident.is_social %}
+                                    Social
+                                {% else %}
+                                    None
+                                {% endif %}
+                            </td>
+                            <td>{{ incident.created_at }}</td>
+                            <td>{{ incident.lot_no }}</td>
+                            <td>{{ incident.tenant_name }}</td>
+                            <td>
+                            <td>
+                                <a href="{% url 'incident_detail' incident.id %}" class="btn btn-info btn-sm">View</a>
+                                <a href="{% url 'incident_edit' incident.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{% url 'incident_delete' incident.id %}"
+                                   class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center">No incidents available.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        document.getElementById('applySort').addEventListener('click', function () {
+            const sortByDate = document.getElementById('sortByDate').value;
+            let url = "{% url 'incidents_list' %}?";
+            if (sortByDate) url += `date=${sortByDate}&`;
+            window.location.href = url;
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'master.html' %}
+
+{% block content %}
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Incidents</h1>
+
+    <!-- Sort Bar -->
+    <div class="sort-bar mb-4">
+
+        <div class="dropdown">
+            <select class="form-control" id="sortByDate">
+                <option value="">Sort by Date</option>
+                <option value="asc">Oldest First</option>
+                <option value="desc">Newest First</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" id="applySort">Apply Sort</button>
+    </div>
+
+    <!-- Incidents Table -->
+    <!-- Incidents Table -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Incident List</h6>
+        </div>
+        <div class="card-body">
+            <!-- Filter by Lot No -->
+            <form method="GET" action="{% url 'incident_list' %}">
+                <div class="form-group">
+                    <label for="lot_no_filter">Filter by Lot No:</label>
+                    <select name="lot_no" id="lot_no_filter" class="form-control">
+                        <option value="">-- Select Lot No --</option>
+                        {% for lot in lot_nos %}
+                            <option value="{{ lot }}" {% if request.GET.lot_no == lot %}selected{% endif %}>
+                                {{ lot }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary mt-2">Filter</button>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="incidentsTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Incident ID</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Date Reported</th>
+                        <th>Lot No</th>
+                        <th>Tenant Name</th>
+                        <th></th> <!-- Empty column for action buttons -->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for incident in incidents %}
+                        <tr>
+                            <td>{{ incident.id }}</td>
+                            <td>{{ incident.description }}</td>
+                            <td>
+                                {% if incident.is_utility %}
+                                    Utility
+                                {% elif incident.is_social %}
+                                    Social
+                                {% else %}
+                                    None
+                                {% endif %}
+                            </td>
+                            <td>{{ incident.created_at }}</td>
+                            <td>{{ incident.lot_no }}</td>
+                            <td>{{ incident.tenant_name }}</td>
+                            <td class="text-center"> <!-- Action buttons directly here -->
+                                <a href="{% url 'incident_detail' incident.id %}" class="btn btn-info btn-sm">
+                                    View
+                                </a>
+                                <a href="{% url 'incident_edit' incident.id %}" class="btn btn-warning btn-sm">
+                                    Edit
+                                </a>
+                                <a href="{% url 'incident_delete' incident.id %}" class="btn btn-danger btn-sm">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center">No incidents available.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        // JavaScript to handle sorting (you can add AJAX to handle this dynamically)
+        document.getElementById('applySort').addEventListener('click', function () {
+            const sortByLot = document.getElementById('sortByLot').value;
+            const sortByTenant = document.getElementById('sortByTenant').value;
+            const sortByDate = document.getElementById('sortByDate').value;
+
+            let url = "{% url 'incidents' %}?";
+            if (sortByLot) url += `lot=${sortByLot}&`;
+            if (sortByTenant) url += `tenant=${sortByTenant}&`;
+            if (sortByDate) url += `date=${sortByDate}&`;
+
+            // Perform an AJAX request or reload the page with the new query parameters
+            window.location.href = url; // For simplicity, using page reload with query params
+        });
+    </script>
+{% endblock %}

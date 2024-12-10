@@ -10,44 +10,68 @@
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
 {% endblock %}
 
-
 {% block content %}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Payments</h6>
         </div>
         <div class="card-body">
+            <!-- Sorting Form -->
+            <form method="GET" class="mb-4">
+                <div class="form-row align-items-center">
+                    <div class="col-md-4 mb-3">
+                        <select name="sort_by" class="form-control">
+                            <option value="">Sort By</option>
+                            <option value="expected_date" {% if request.GET.sort_by == "expected_date" %}selected{% endif %}>
+                                Expected Date (Ascending)
+                            </option>
+                            <option value="-expected_date" {% if request.GET.sort_by == "-expected_date" %}selected{% endif %}>
+                                Expected Date (Descending)
+                            </option>
+                            <option value="payment_date" {% if request.GET.sort_by == "payment_date" %}selected{% endif %}>
+                                Payment Date (Ascending)
+                            </option>
+                            <option value="-payment_date" {% if request.GET.sort_by == "-payment_date" %}selected{% endif %}>
+                                Payment Date (Descending)
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Sort</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Payments Table -->
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-    <thead>
-        <tr>
-            <th>Lot No</th>
-            <th>Tenant</th>
-            <th>Status</th>
-            <th>Expected Date</th>
-            <th>Payment Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for payment in payments %}
-        <tr>
-            <td>{{ payment.lot_no }}</td>
-            <td>{{ payment.tenant }}</td>
-            <td>{{ payment.status }}</td>
-            <td>{{ payment.expected_date }}</td>
-            <td>{{ payment.payment_date }}</td>
-        </tr>
-        {% endfor %}
-   </tbody>
+                    <thead>
+                        <tr>
+                            <th>Lot No</th>
+                            <th>Tenant</th>
+                            <th>Status</th>
+                            <th>Expected Date</th>
+                            <th>Payment Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for payment in payments %}
+                            <tr>
+                                <td>{{ payment.lot_no }}</td>
+                                <td>{{ payment.tenant }}</td>
+                                <td>{{ payment.status }}</td>
+                                <td>{{ payment.expected_date }}</td>
+                                <td>{{ payment.payment_date }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-
 {% endblock content %}
-{% block extra_js %}
 
+{% block extra_js %}
     <!-- Page level plugins -->
     <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>

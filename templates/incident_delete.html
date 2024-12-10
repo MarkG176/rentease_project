@@ -1,0 +1,30 @@
+{% extends "master.html" %}
+
+{% block content %}
+  <div class="container">
+    <h2>Delete Incident</h2>
+    
+    <div class="alert alert-warning">
+      <strong>Warning!</strong> Are you sure you want to delete this incident?
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h4>{{ incident.tenant_name }} - Incident #{{ incident.inc_no }}</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Lot No:</strong> {{ incident.lot_no }}</p>
+        <p><strong>Description:</strong> {{ incident.description }}</p>
+        <p><strong>Is Utility:</strong> {% if incident.is_utility %} Yes {% else %} No {% endif %}</p>
+        <p><strong>Is Social:</strong> {% if incident.is_social %} Yes {% else %} No {% endif %}</p>
+      </div>
+      <div class="card-footer text-right">
+        <form method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Delete</button>
+          <a href="{% url 'incident_detail' incident.id %}" class="btn btn-secondary">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

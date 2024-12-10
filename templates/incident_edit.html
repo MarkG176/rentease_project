@@ -1,0 +1,40 @@
+{% extends "master.html" %}
+
+{% block content %}
+  <div class="container">
+    <h2>Edit Incident</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="tenant_name">Tenant Name</label>
+        <input type="text" class="form-control" id="tenant_name" name="tenant_name" value="{{ incident.tenant_name }}">
+      </div>
+      <div class="form-group">
+        <label for="lot_no">Lot No</label>
+        <input type="text" class="form-control" id="lot_no" name="lot_no" value="{{ incident.lot_no }}">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="4">{{ incident.description }}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="is_utility">Is Utility</label>
+        <select class="form-control" id="is_utility" name="is_utility">
+          <option value="True" {% if incident.is_utility %} selected {% endif %}>Yes</option>
+          <option value="False" {% if not incident.is_utility %} selected {% endif %}>No</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="is_social">Is Social</label>
+        <select class="form-control" id="is_social" name="is_social">
+          <option value="True" {% if incident.is_social %} selected {% endif %}>Yes</option>
+          <option value="False" {% if not incident.is_social %} selected {% endif %}>No</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+      <a href="{% url 'incident_detail' incident.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

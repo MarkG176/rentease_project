@@ -4,6 +4,7 @@ from django.db import models
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.forms import IntegerField
 
 
 class Tenants(models.Model):
@@ -31,6 +32,7 @@ class Payments(models.Model):
     lot_no = models.ForeignKey(Properties, on_delete=models.CASCADE)
     tenant = models.ForeignKey(Tenants, on_delete=models.CASCADE, related_name='payments')
     status = models.CharField(max_length=100)  # successful, late, failed
+    payment_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0000.00)
     expected_date = models.DateField()
     payment_date = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -62,3 +64,14 @@ def create_or_update_payment(sender, instance, **kwargs):
             payment.expected_date = expected_payment_date
             payment.status = 'pending'
             payment.save()
+
+class Incidents(models.Model):
+    tenant_name = models.CharField(max_length=255)
+    lot_no = models.CharField(max_length=100)
+    description = models.TextField()
+    is_utility = models.BooleanField(default=False)
+    is_social = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Incident by {self.tenant_name} in Lot {self.lot_no}"
