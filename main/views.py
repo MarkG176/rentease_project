@@ -13,7 +13,7 @@ from datetime import timedelta, date
 # Create your views here.
 from django.shortcuts import render
 
-from .app_forms import TenantForm, IncidentForm
+from .app_forms import TenantForm, IncidentForm, PaymentForm
 from .models import Tenants, Properties, Payments, Incidents
 
 from django.contrib.auth.decorators import login_required
@@ -30,6 +30,8 @@ def dashboard(request):
         return redirect('dashboard_redirect')
     # ... rest of your landlord dashboard view
 
+def payment_view(request):
+    return render(request, 'payment_form.html')
 
 def tenants_view(request):
     tenants = Tenants.objects.all()

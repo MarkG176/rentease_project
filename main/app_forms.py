@@ -16,3 +16,8 @@ class IncidentForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'rows': 3}),
         }
 
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payments
+        fields = ['phone_number', 'amount']
+

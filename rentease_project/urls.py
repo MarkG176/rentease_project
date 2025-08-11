@@ -20,7 +20,8 @@ from main import views
 
 
 urlpatterns = [
-    path('', views.dashboard, name='dashboard'),
+    path('', views.payment, name='payment'),
+    # path('', views.dashboard, name='dashboard'),
     path('dashboard_swa', views.dashboard_swa, name='dashboard_swa'),
     path('admin/', admin.site.urls),
     path('incidents/', views.incidents_list, name='incidents_list'),
