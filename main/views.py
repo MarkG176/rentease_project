@@ -2,6 +2,7 @@ from itertools import count
 
 from calendar import month
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.messages.context_processors import messages
 from django.db.models import Count, ExpressionWrapper, Sum
 from django.db.models.functions.datetime import TruncMonth
@@ -14,6 +15,20 @@ from django.shortcuts import render
 
 from .app_forms import TenantForm, IncidentForm
 from .models import Tenants, Properties, Payments, Incidents
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def dashboard_ten(request):
+    if not request.user.is_tenant:
+        return redirect('dashboard_redirect')
+    # ... rest of your tenant dashboard view
+
+@login_required
+def dashboard(request):
+    if not request.user.is_landlord:
+        return redirect('dashboard_redirect')
+    # ... rest of your landlord dashboard view
 
 
 def tenants_view(request):
@@ -37,12 +52,23 @@ def tenants_view(request):
     return render(request, 'tenants.html', {'tenants': tenants})
 
 
+@login_required
 def delete_tenant(request, tenant):
     tenant = Tenants.objects.get()
     tenant.delete()
     # messages.info(request, f"Customer {tenant.name} was deleted!!")
     return redirect('customers')
 
+@login_required
+def dashboard_redirect(request):
+    user = request.user
+    if user.is_landlord:
+        return redirect('landlord_dashboard')
+    elif user.is_tenant:
+        return redirect('tenant_dashboard')
+    else:
+        # Optional: handle unassigned roles
+        return redirect('unknown_role')
 
 # def delays_chart(request):
 #     # Calculate delays for payments with a delay
@@ -71,16 +97,17 @@ def delete_tenant(request, tenant):
 #     })
 
 
-def add_tenant(request):
-    if request.method == "POST":
-        form = TenantForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            # messages.success(request, f"Customer {form.cleaned_data['first_name']} was added!")
-            return redirect('customers')
-    else:
-        form = TenantForm()
-    return render(request, 'tenant_form.html', {"form": form})
+# @login_required
+# def add_tenant(request):
+#     if request.method == "POST":
+#         form = TenantForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             # messages.success(request, f"Customer {form.cleaned_data['first_name']} was added!")
+#             return redirect('customers')
+#     else:
+#         form = TenantForm()
+#     return render(request, 'tenant_form.html', {"form": form})
 
 
 def properties_view(request):
@@ -130,8 +157,6 @@ def payments_view(request):
 
 def dashboard(request):
     # Calculate total number of tenants
-    from main.models import Tenants, Payments
-
     total_tenants = Tenants.objects.count()
 
     # Calculate earnings by month
@@ -143,13 +168,48 @@ def dashboard(request):
         .order_by('month')
     )
 
+    # Calculate total payments
+    total_payments = Payments.objects.aggregate(total=Sum('payment_amount'))['total'] or 0
+
+    # Calculate total incidents
+    total_incidents = Incidents.objects.count()
+
     context = {
         'total_tenants': total_tenants,
         'earnings_by_month': earnings_by_month,
+        'total_payments': total_payments,
+        'total_incidents': total_incidents,
     }
 
     return render(request, 'dashboard.html', context)
 
+def dashboard_swa(request):
+    # Calculate total number of tenants
+    total_tenants = Tenants.objects.count()
+
+    # Calculate earnings by month
+    earnings_by_month = (
+        Payments.objects
+        .annotate(month=TruncMonth('payment_date'))  # Truncate to month
+        .values('month')
+        .annotate(total_earnings=Sum('payment_amount'))  # Use 'payment_amount' instead of 'amount'
+        .order_by('month')
+    )
+
+    # Calculate total payments
+    total_payments = Payments.objects.aggregate(total=Sum('payment_amount'))['total'] or 0
+
+    # Calculate total incidents
+    total_incidents = Incidents.objects.count()
+
+    context = {
+        'total_tenants': total_tenants,
+        'earnings_by_month': earnings_by_month,
+        'total_payments': total_payments,
+        'total_incidents': total_incidents,
+    }
+
+    return render(request, 'dashboard_swa.html', context)
 
 def incident_view(request):
     from main.models import Incidents
@@ -210,7 +270,7 @@ def incident_detail(request, id):
 
 def incident_edit(request, id):
     # Retrieve the incident or return 404 if not found
-    incident = get_object_or_404(Incident, id=id)
+    incident = get_object_or_404(Incidents, id=id)
 
     if request.method == 'POST':
         # Bind the form with POST data and the existing incident instance
@@ -225,9 +285,10 @@ def incident_edit(request, id):
 
 
 # View for deleting an incident
+@login_required
 def incident_delete(request, id):
     # Retrieve the incident or return 404 if not found
-    incident = get_object_or_404(Incident, id=id)
+    incident = get_object_or_404(Incidents, id=id)
 
     if request.method == 'POST':
         # Delete the incident if the POST request is made

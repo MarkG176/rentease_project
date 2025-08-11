@@ -1,0 +1,115 @@
+
+
+{% extends 'master_swa.html' %}
+{% load static %}
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Takwimu</h1>
+
+<!-- Content Row -->
+<div class="row justify-content-between">
+
+    <!-- Total Tenants Card -->
+    <div class="col-md-4 mb-4">
+        <div class="card border-left-primary shadow h-100">
+            <div class="card-body d-flex align-items-center">
+                <div class="mr-3">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Wateja</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_tenants }}</div>
+                </div>
+                <div class="ml-auto">
+                    <i class="fas fa-users fa-3x text-black-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Payments Card -->
+    <div class="col-md-4 mb-4">
+        <div class="card border-left-success shadow h-100">
+            <div class="card-body d-flex align-items-center">
+                <div class="mr-3">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Malipo</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_payments }}</div>
+                </div>
+                <div class="ml-auto">
+                    <i class="fas fa-dollar-sign fa-3x text-black-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Incidents Card -->
+    <div class="col-md-4 mb-4">
+        <div class="card border-left-warning shadow h-100">
+            <div class="card-body d-flex align-items-center">
+                <div class="mr-3">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Matukio</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_incidents }}</div>
+                </div>
+                <div class="ml-auto">
+                    <i class="fas fa-exclamation-circle fa-3x text-black-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <!-- Page level plugins -->
+    <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+
+    <!-- Existing Custom Scripts -->
+    <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+    <script src="{% static 'js/demo/chart-bar-demo.js' %}"></script>
+
+    <script>
+        // Prepare data for chart
+        const earningsData = {
+            labels: [
+                {% for earnings in earnings_by_month %}
+                    "{{ earnings.month|date:"F Y" }}",
+                {% endfor %}
+            ],
+            datasets: [{
+                label: 'Earnings',
+                data: [
+                    {% for earnings in earnings_by_month %}
+                        {{ earnings.total_earnings }},
+                    {% endfor %}
+                ],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Create the chart
+        let ctx = document.getElementById('earningsChart').getContext('2d');
+        let earningsChart;
+        earningsChart = new Chart(ctx, {
+            type: 'line',
+            data: earningsData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        );
+
+    </script>
+{% endblock %}
+
+
+

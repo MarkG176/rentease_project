@@ -21,16 +21,18 @@ from main import views
 
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
+    path('dashboard_swa', views.dashboard_swa, name='dashboard_swa'),
     path('admin/', admin.site.urls),
     path('incidents/', views.incidents_list, name='incidents_list'),
 
     path('incident/<int:id>/', views.incident_detail, name='incident_detail'),
-    
+
     path('incidents/edit/<int:id>/', views.incident_edit, name='incident_edit'),
     path('incidents/delete/<int:id>/', views.incident_delete, name='incident_delete'),
     path('tenants/', views.tenants_view, name='tenants'),
+    # path('tenants_swa/', views.tenants_swa_view, name='tenants'),
     # path('charts/delays/', views.delays_chart, name='delays_chart'),
-    path('add/tenant', views.add_tenant, name='add_tenant'),
+    # path('add/tenant', views.add_tenant, name='add_tenant'),
     path('customers/delete/<int:tenant_id>', views.delete_tenant, name='delete_tenant'),
     path('properties/', views.properties_view, name='properties'),
 
@@ -40,4 +42,6 @@ urlpatterns = [
     #     path('pie-chart', views.pie_chart, name='pie_chart'),
     #     path('line-chart', views.line_chart, name='line_chart'),
     #     path('bar-chart', views.bar_chart, name='bar_chart')
+
+    
 ]

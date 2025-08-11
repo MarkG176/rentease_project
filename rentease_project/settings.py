@@ -34,6 +34,8 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'django_daraja',
+    'crispy_forms',
+    'crispy_bootstrap5',
     # 'crispy-bootstrap5',
     # 'django-crispy-forms'
 
@@ -115,6 +119,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('sw', 'Swahili'),
+]
+
 TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
@@ -132,7 +141,8 @@ STATICFILES_DIRS = [BASE_DIR/'main/assets']
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -142,8 +152,8 @@ MPESA_ENVIRONMENT = 'sandbox'
 
 # Credentials for the daraja app
 
-MPESA_CONSUMER_KEY = os.getenv("MPESA_COSUMER_KEY")
-MPESA_CONSUMER_SECRET = 'GbHNEY3pFBAi0sw0vvCYoB6wtcx98IHdHljdkxNQdmbKcv2W3M4AJCvPw0As69Io'
+MPESA_CONSUMER_KEY = os.getenv("MPESA_CONSUMER_KEY")
+MPESA_CONSUMER_SECRET = os.getenv("MPESA_CONSUMER_SECRET")
 
 #Shortcode to use for transactions. For sandbox  use the Shortcode 1 provided on test credentials page
 
